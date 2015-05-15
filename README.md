@@ -24,6 +24,7 @@ lease 10.0.1.1 {
   cltt 5 2015/05/15 01:57:17;
   binding state free;
   hardware ethernet 00:11:22:33:44:55;
+  client-hostname "host1";
   uid "foo";
 }
 lease 10.0.1.2 {
@@ -33,6 +34,7 @@ lease 10.0.1.2 {
   cltt 5 2015/05/15 02:09:16;
   binding state free;
   hardware ethernet 00:11:22:33:44:56;
+  client-hostname "host2";
   uid "bar";
 }
 lease 10.0.1.3 {
@@ -42,6 +44,7 @@ lease 10.0.1.3 {
   cltt 5 2015/05/15 02:16:01;
   binding state free;
   hardware ethernet 00:11:22:33:44:57;
+  client-hostname "host3";
   uid "baz-1";
 }
 lease 10.0.1.3 {
@@ -51,6 +54,7 @@ lease 10.0.1.3 {
   cltt 5 2015/05/15 02:17:01;
   binding state free;
   hardware ethernet 00:11:22:33:44:57;
+  client-hostname "host3";
   uid "baz-2";
 }
 ```
@@ -66,6 +70,7 @@ return
     "cltt": "2015-05-15T05:57:17.000Z",
     "binding state": "free",
     "hardware ethernet": "00:11:22:33:44:55",
+    "client-hostname": "host1",
     "uid": "foo"
   },
   "10.0.1.2": {
@@ -75,6 +80,7 @@ return
     "cltt": "2015-05-15T06:09:16.000Z",
     "binding state": "free",
     "hardware ethernet": "00:11:22:33:44:56",
+    "client-hostname": "host2",
     "uid": "bar"
   },
   "10.0.1.3": {
@@ -84,6 +90,7 @@ return
     "cltt": "2015-05-15T06:17:01.000Z",
     "binding state": "free",
     "hardware ethernet": "00:11:22:33:44:57",
+    "client-hostname": "host3",
     "uid": "baz-2"
   }
 }

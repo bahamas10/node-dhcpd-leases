@@ -15,6 +15,7 @@ var s = [
   '  cltt 5 2015/05/15 01:57:17;',
   '  binding state free;',
   '  hardware ethernet 00:11:22:33:44:55;',
+  '  client-hostname "host1";',
   '  uid "foo";',
   '}',
   'lease 10.0.1.2 {',
@@ -24,6 +25,7 @@ var s = [
   '  cltt 5 2015/05/15 02:09:16;',
   '  binding state free;',
   '  hardware ethernet 00:11:22:33:44:56;',
+  '  client-hostname "host2";',
   '  uid "bar";',
   '}',
   'lease 10.0.1.3 {',
@@ -33,6 +35,7 @@ var s = [
   '  cltt 5 2015/05/15 02:16:01;',
   '  binding state free;',
   '  hardware ethernet 00:11:22:33:44:57;',
+  '  client-hostname "host3";',
   '  uid "baz-1";',
   '}',
   'lease 10.0.1.3 {',
@@ -42,6 +45,7 @@ var s = [
   '  cltt 5 2015/05/15 02:17:01;',
   '  binding state free;',
   '  hardware ethernet 00:11:22:33:44:57;',
+  '  client-hostname "host3";',
   '  uid "baz-2";',
   '}',
 ].join('\n');
@@ -62,6 +66,7 @@ Object.keys(data).forEach(function(ip) {
   assert.equal(o['binding state'], 'free');
   assert(o['hardware ethernet'].match(/([0-9a-fA-F]{2}:){5}([0-9a-fA-F]){2}/));
   assert(o.hasOwnProperty('uid'));
+  assert(o.hasOwnProperty('client-hostname'));
 });
 
 assert.equal(data['10.0.1.3'].uid, 'baz-2');
