@@ -1,0 +1,25 @@
+{
+  "name": "dhcpd-leases",
+  "version": "0.0.0",
+  "description": "parse isc-dhcpd dhcpd.leases(5) file format",
+  "main": "dhcpd-leases.js",
+  "scripts": {
+    "test": "node ./test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bahamas10/node-dhcpd-leases.git"
+  },
+  "keywords": [
+    "dhcpd",
+    "leases",
+    "isc-dhcpd",
+    "format"
+  ],
+  "author": "Dave Eddy <dave@daveeddy.com> (http://www.daveeddy.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahamas10/node-dhcpd-leases/issues"
+  },
+  "homepage": "https://github.com/bahamas10/node-dhcpd-leases"
+}
