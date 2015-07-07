@@ -19,7 +19,7 @@ function dhcpdleases(s) {
       leases[current] = {};
     } else if ((m = line.match(/^  (starts|ends|cltt|atsfp|tstp|tsfp) \d+ (.*);$/))) {
       // starts, ends, cltt, etc. dates
-      leases[current][m[1]] = new Date(m[2]);
+      leases[current][m[1]] = new Date(m[2] + ' UTC');
     } else if ((m = line.match(/^  ([a-zA-Z0-9 -]+) ([^"].*);$/))) {
       // misc.
       leases[current][m[1]] = m[2];
