@@ -52,23 +52,25 @@ var s = [
 
 var data = dhcpdleases(s);
 
-assert.equal(typeof data, 'object');
-assert(data.hasOwnProperty('10.0.1.1'));
-assert(data.hasOwnProperty('10.0.1.2'));
-assert(data.hasOwnProperty('10.0.1.3'));
+assert.equal(data instanceof Array, true);
+assert.equal(data.length, 4);
 
-Object.keys(data).forEach(function(ip) {
-  var o = data[ip];
+data.forEach(function(lease) {
+
   ['starts', 'ends', 'tstp', 'cltt'].forEach(function(key) {
-    assert(o[key] instanceof Date && isFinite(o[key]));
+    assert(lease[key] instanceof Date && isFinite(lease[key]))
   });
 
-  assert.equal(o['binding state'], 'free');
-  assert(o['hardware ethernet'].match(/([0-9a-fA-F]{2}:){5}([0-9a-fA-F]){2}/));
-  assert(o.hasOwnProperty('uid'));
-  assert(o.hasOwnProperty('client-hostname'));
+  assert.equal(lease['binding state'], 'free');
+  assert(lease['hardware ethernet'].match(/([0-9a-fA-F]{2}:){5}([0-9a-fA-F]){2}/));
+  assert(lease.hasOwnProperty('uid'));
+  assert(lease.hasOwnProperty('client-hostname'));
 });
 
-assert.equal(data['10.0.1.3'].uid, 'baz-2');
+assert.equal(data[0].uid, 'foo');
+assert.equal(data[1].uid, 'bar');
+assert.equal(data[2].uid, 'baz-1');
+assert.equal(data[3].uid, 'baz-2');
 
 console.log(JSON.stringify(data, null, 2));
+
