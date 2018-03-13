@@ -8,24 +8,26 @@
 
 module.exports = dhcpdleases;
 function dhcpdleases(s) {
-  var leases = {};
+  var leases = [];
 
   var current;
+  var index = -1;
   s.trim().split('\n').forEach(function(line) {
     var m;
     if ((m = line.match(/^lease (.*) {$/))) {
       // new lease
-      current = m[1];
-      leases[current] = {};
+      index += 1
+      leases[index] = {}
+      leases[index].ip = m[1]
     } else if ((m = line.match(/^  (starts|ends|cltt|atsfp|tstp|tsfp) \d+ (.*);$/))) {
       // starts, ends, cltt, etc. dates
-      leases[current][m[1]] = new Date(m[2] + ' UTC');
+      leases[index][m[1]] = new Date(m[2] + ' UTC');
     } else if ((m = line.match(/^  ([a-zA-Z0-9 -]+) ([^"].*);$/))) {
       // misc.
-      leases[current][m[1]] = m[2];
+      leases[index][m[1]] = m[2];
     } else if ((m = line.match(/^  ([a-zA-Z0-9 -]+) "(.*)";$/))) {
       // client-hostname, uid
-      leases[current][m[1]] = m[2];
+      leases[index][m[1]] = m[2];
     }
   });
 

@@ -1,6 +1,6 @@
 {
   "name": "dhcpd-leases",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "parse isc-dhcpd dhcpd.leases(5) file format",
   "main": "dhcpd-leases.js",
   "scripts": {
