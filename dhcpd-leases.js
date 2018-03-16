@@ -6,8 +6,13 @@
  * License: MIT
  */
 
+var assert = require('assert-plus');
+
 module.exports = dhcpdleases;
+
 function dhcpdleases(s) {
+  assert.string(s, 's');
+
   var leases = [];
 
   var current;
@@ -29,6 +34,15 @@ function dhcpdleases(s) {
       // client-hostname, uid
       leases[index][m[1]] = m[2];
     }
+  });
+
+  // sanity check
+  assert.arrayOfObject(leases, 'leases');
+  leases.forEach(function (lease) {
+    assert.string(lease.ip, 'lease.ip');
+    assert.string(lease['hardware ethernet'], 'lease["hardware ethernet"]');
+    assert.date(lease.starts, 'lease.starts');
+    assert.date(lease.ends, 'lease.ends');
   });
 
   return leases;

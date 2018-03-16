@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/bahamas10/node-dhcpd-leases/issues"
   },
-  "homepage": "https://github.com/bahamas10/node-dhcpd-leases"
+  "homepage": "https://github.com/bahamas10/node-dhcpd-leases",
+  "dependencies": {
+    "assert-plus": "^1.0.0"
+  }
 }
