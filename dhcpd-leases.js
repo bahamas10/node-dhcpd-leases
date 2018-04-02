@@ -40,9 +40,10 @@ function dhcpdleases(s) {
   assert.arrayOfObject(leases, 'leases');
   leases.forEach(function (lease) {
     assert.string(lease.ip, 'lease.ip');
-    assert.string(lease['hardware ethernet'], 'lease["hardware ethernet"]');
     assert.date(lease.starts, 'lease.starts');
     assert.date(lease.ends, 'lease.ends');
+    assert.optionalString(lease['hardware ethernet'],
+        'lease["hardware ethernet"]');
   });
 
   return leases;

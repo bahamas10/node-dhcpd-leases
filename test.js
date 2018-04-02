@@ -1,4 +1,4 @@
-var assert = require('assert');
+var assert = require('assert-plus');
 
 var dhcpdleases = require('./');
 
@@ -47,13 +47,21 @@ var s = [
   '  hardware ethernet 00:11:22:33:44:57;',
   '  client-hostname "host3";',
   '  uid "baz-2";',
+  'lease 10.0.1.4 {',
+  '  starts 5 2015/05/15 02:17:01;',
+  '  ends 5 2015/05/15 02:28:01;',
+  '  tstp 5 2015/05/15 02:28:01;',
+  '  cltt 5 2015/05/15 02:18:01;',
+  '  binding state free;',
+  '  client-hostname "host4";',
+  '  uid "no-mac-address";',
   '}',
 ].join('\n');
 
 var data = dhcpdleases(s);
 
 assert.equal(data instanceof Array, true);
-assert.equal(data.length, 4);
+assert.equal(data.length, 5);
 
 data.forEach(function(lease) {
 
@@ -62,15 +70,19 @@ data.forEach(function(lease) {
   });
 
   assert.equal(lease['binding state'], 'free');
-  assert(lease['hardware ethernet'].match(/([0-9a-fA-F]{2}:){5}([0-9a-fA-F]){2}/));
   assert(lease.hasOwnProperty('uid'));
   assert(lease.hasOwnProperty('client-hostname'));
+  if (lease['hardware ethernet']) {
+    assert.string(lease['hardware ethernet']);
+    assert(lease['hardware ethernet'].match(/([0-9a-fA-F]{2}:){5}([0-9a-fA-F]){2}/));
+  }
 });
 
 assert.equal(data[0].uid, 'foo');
 assert.equal(data[1].uid, 'bar');
 assert.equal(data[2].uid, 'baz-1');
 assert.equal(data[3].uid, 'baz-2');
+assert.equal(data[4].uid, 'no-mac-address');
 
 console.log(JSON.stringify(data, null, 2));
 
